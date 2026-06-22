@@ -59,8 +59,10 @@ Spain averages **17.3%** and Greece **13.4%** unemployment over the period — b
 
 **4. German reunification is visible directly in the population data.**
 Using a `LAG()` window function to calculate year-over-year population change, Germany's population jumps by **+580,867** in 1991 — its largest single-year increase in the dataset — corresponding to formal reunification in October 1990.
+
 **5. Spain's unemployment moving average lags the actual rate during the 2008–2013 crisis.**
 A 3-year moving average (`AVG()` with a fixed window frame) smooths short-term noise but is structurally slow to track fast directional moves. During Spain's sharp unemployment rise in the Eurozone crisis years, the actual rate consistently ran ahead of its own moving average — illustrating the trade-off between smoothing and responsiveness in trend analysis.
+
 ## Example Query
 
 Ranking countries by inflation within each year, using `RANK()` and `PARTITION BY`:
