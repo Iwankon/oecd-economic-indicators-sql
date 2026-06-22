@@ -52,3 +52,20 @@ JOIN countries c ON i.country_code = c.country_code
 WHERE i.inflation_annual_pct IS NOT NULL
 ORDER BY i.year, inflation_rank
 LIMIT 20;
+-- =========================================================
+-- Query 5: 3-year moving average of unemployment for Spain
+-- (demonstrates AVG with a fixed-size window frame)
+-- =========================================================
+SELECT
+    c.country_name,
+    i.year,
+    i.unemployment_pct,
+    AVG(i.unemployment_pct) OVER (
+        PARTITION BY i.country_code
+        ORDER BY i.year
+        ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+    ) AS unemployment_3yr_avg
+FROM indicators i
+JOIN countries c ON c.country_code = i.country_code
+WHERE c.country_name = 'Spain'
+ORDER BY i.year;
